@@ -1,36 +1,44 @@
 import sys
+
+
 account_balance = 0
 account_opened = False
 
 
 def open_account():
     global account_balance, account_opened, name
-    name = input("Whats your name: ").capitalize()
-    print(f'Heyyy! welcome {name}.\n')
-    print(f'You would have to deposit 20$ or more to create an account.\n')
-    consent = input("You want to create? [yes/no] :").lower()
-    while consent not in ["yes", "no"]:
-        try:
-            name = input("Whats your name: ").capitalize()
-            print(f'Heyyy! welcome {name}.\n')
-            print(f'You would have to deposit 20$ or more to create an account.\n')
-            consent = input("You want to create? [yes/no] :").lower()
-            consent = input("You want to create? please [yes/no] :").lower()
+    name = input("What's your name: ").capitalize()
+    print(f'Heyyy! Welcome {name}.\n')
+    print(f'You must deposit $20 or more to create an account.\n')
+    while True:
+        consent = input("Do you want to create an account? [yes/no]: ").lower()
+        if consent in ["yes", "no"]:
             break
-        except:
-            print("no")
-    while consent == "yes":
-        try:
-            intial_deposit = float(
-                input("How much would you like to deposit: "))
-            account_balance += intial_deposit
-            account_opened = True
-            print(
-                f'Congratulations {name}.\n'
-                f'Your account is created.\n'
-                f'Your current balance: ${account_balance:,.2f}')
-        except:
-            exit()
+        print("Please type yes or no.")
+    if consent == "yes":
+        while True:
+            try:
+                print(f"Lets create a 4-digit pin first [eg: 1234].")
+                pin = input("Enter a pin : ")
+                while not (pin.isdigit()) and not (len(pin) == 4):
+                    print("A four digit pin please [eg 1234]")
+                    pin = input("Enter a pin : ")
+                print("Pin created.")
+                initial_deposit = float(
+                    input("How much would you like to deposit: "))
+
+                if initial_deposit < 20:
+                    print("Error: Minimum deposit is $20. Please try again.")
+                    continue
+                account_balance += initial_deposit
+                account_opened = True
+                print(f'Congratulations {name}! Your account is created.')
+                print(f'Current balance: ${account_balance:,.2f}')
+                break
+            except ValueError:
+                print("Invalid input. Please enter a number (e.g., 20 or 25.75).")
+    else:
+        exit()
 
 
 def deposit():
@@ -55,24 +63,45 @@ def deposit():
 
 def withdraw():
     global account_balance
-    withdrawl = float(input("Enter the amount you want to withdraw: "))
-    account_balance -= withdrawl
-    print(
-        f'Withdrawal successful. Your current balance: ${account_balance:,.2f}')
+    while True:
+        try:
+            withdrawal = float(
+                input("Enter the amount you want to withdraw: "))
+            if withdrawal > account_balance:
+                print("Request Declined: Insufficent balance")
+                print(f"Your account balance is {account_balance:,.2f}.")
+                ask = input(
+                    "You want to withdraw a different amount? [yes/no]")
+                while ask not in ["yes", "no"]:
+                    ask = input(
+                        "You want to withdraw a different amount? [yes/no]")
+                if ask == "yes":
+                    continue
+                else:
+                    return
+            if withdrawal <= 0:
+                print("Please enter a positive amount.")
+                continue
+            account_balance -= withdrawal
+            print(
+                f'Withdrawal successful. Your remaining balance: ${account_balance:,.2f}')
+            break
+        except ValueError:
+            print("Invalid input. Please use numbers (e.g., 50 or 90.75).")
 
 
 def print_balance():
     global account_balance
-    print(f'Current balance= ${account_balance:,.2f}')
+    print(f'Current balance = ${account_balance:,.2f}')
 
 
-def exit():
+def exit_program():
     print("bye have a good day.")
     sys.exit()
 
 
 def ask():
-    print("------------------------------------------------------------------------")
+    print(f"{'-'*40}")
     print(f'What would you like to do {name}.')
     print("OPTIONS")
     print("1) Menu for [Deposit , Withdraw , Check balance]")
@@ -81,9 +110,9 @@ def ask():
     if asking not in ["1", "2"]:
         asking = input("Please Choose [1 or 2] :")
     else:
-        exit()
+        exit_program()
     if asking == "1":
-        print("------------------------------------------------------------------------")
+        print(f"{'-'*40}")
         print("OPTIONS")
         print("1) Deposit")
         print("2) Withdraw")
@@ -99,24 +128,25 @@ def ask():
         elif menu_choice == "3":
             print_balance()
         else:
-            exit()
+            exit_program()
 
 
 def main():
-    print("------------------------------------------------------------------------")
-    print("------------------------------------------------------------------------")
-    print("-------------------------CLI BANKING SYSTEM-----------------------------")
-    print("------------------------------------------------------------------------")
-    print("------------------------------------------------------------------------")
+    print(f"{'-'*40}")
+    print(f"{'-'*40}")
+    print(f"{'-'*11}CLI BANKING SYSTEM{'-'*11}")
+    print(f"{'-'*40}")
+    print(f"{'-'*40}")
     print("OPTIONS")
     print("1) Create a new account")
     print("2) Sign into existing account")
     print("3) Exit")
     selection = input("Choose [1 , 2 or 3] :")
-    if selection not in ["1", "2", "3"]:
+    while selection not in ["1", "2", "3"]:
         selection = input("Please Choose [1 , 2 or 3] :")
     if selection == "1":
         open_account()
+        ask()
     elif selection == "2":
         pass
     else:
