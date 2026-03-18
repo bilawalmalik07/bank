@@ -5,7 +5,11 @@ A professional Python-based Command Line Interface (CLI) application that integr
 Click the button below to run this app instantly in your browser:
 
 > [!IMPORTANT]
-> **Please wait 15-20 seconds** after the Codespace opens. It will automatically install the database drivers and required libraries. Once the terminal stays still, you can run the app.
+> **Setup Instructions:**
+>
+> 1. Once the Codespace opens, **click on `main.py`** in the file explorer.
+> 2. **Wait 20-30 seconds** for the terminal to finish installing all requirements (database drivers and environment tools)
+> 3. Once the terminal is ready, run the app by typing: python main.py
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/bilawalmalik07/bank)
 
