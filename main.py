@@ -223,7 +223,7 @@ while True:
     print(f"{'-'*40}")
     print(f"{'-'*40}")
     print("OPTIONS\n")
-    print("1) Create a new account ")
+    print("1) Create a new account")
     print("2) Sign into existing account")
     print("3) Exit")
     print(f"{'-'*40}")
