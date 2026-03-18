@@ -71,6 +71,7 @@ def open_account():
                 print("\nInvalid input. Please enter a number (e.g., 20 or 25.75).")
     else:
         print("Returning back")
+        ask()
         return
 
 
