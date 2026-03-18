@@ -2,16 +2,7 @@
   "name": "Python 3 Bank System",
   "image": "mcr.microsoft.com/devcontainers/python:3.11",
   "containerEnv": {
-    "DATABASE_URL": "postgresql://neondb_owner:npg_kuc4wvBaDM5Z@ep-dry-wave-angmgeh2-pooler.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+    "DATABASE_URL": "postgresql://neondb_owner:npg_kuc4wvBaDM5Z@ep-dry-wave-angmgeh2-pooler.c-6.us-east-2.aws.neon.tech/neondb?sslmode=require"
   },
-
-  "postCreateCommand": "pip install -r requirements.txt",
-
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-python.python"
-      ]
-    }
-  }
+  "postCreateCommand": "pip install -r requirements.txt"
 }
