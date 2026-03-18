@@ -10,12 +10,12 @@ connection_url = os.getenv("DATABASE_URL")
 conn = psycopg2.connect(connection_url)
 
 
-account_balance = 0
+balance = 0
 account_opened = False
 
 
 def open_account():
-    global account_balance, account_opened, name
+    global balance, account_opened, name, username
     name = input("What's your name: ").capitalize()
     print(f'Heyyy! Welcome {name}.\n')
     print(f'You must deposit $20 or more to create an account.\n')
@@ -27,7 +27,19 @@ def open_account():
     if consent == "yes":
         while True:
             try:
-                print(f"Lets create a 4-digit pin first [eg: 1234].")
+                username = input("Create a username : ")
+                cur = conn.cursor()
+                sql_1 = "SELECT username from accounts WHERE username=%s"
+                data_1 = (username)
+                cur.execute(sql_1, data_1)
+                existing_user = cur.fetchone()
+                if existing_user:
+                    print("Sorry! , this username is taken try another one.")
+                    cur.close()
+                    continue
+                else:
+                    print("Username created")
+                print(f"Now create a 4-digit Pin [eg: 1234].")
                 pin = input("Enter a pin : ")
                 while not (pin.isdigit()) and not (len(pin) == 4):
                     print("A four digit pin please [eg 1234]")
@@ -39,10 +51,21 @@ def open_account():
                 if initial_deposit < 20:
                     print("Error: Minimum deposit is $20. Please try again.")
                     continue
-                account_balance += initial_deposit
+                balance += initial_deposit
                 account_opened = True
+                try:
+                    cur = conn.cursor()
+                    sql_2 = "INSERT INTO accounts (name, username, pin, balance) VALUES (%s, %s, %s, %s);"
+                    data_2 = (name, username, pin, initial_deposit)
+                    cur.execute(sql_2, data_2)
+                    conn.commit()
+                    cur.close()
+                except Exception as e:
+                    print(f"Failed to save account: {e}")
+                    conn.rollback()
+
                 print(f'Congratulations {name}! Your account is created.')
-                print(f'Current balance: ${account_balance:,.2f}')
+                print(f'Current balance: ${balance:,.2f}')
                 break
             except ValueError:
                 print("Invalid input. Please enter a number (e.g., 20 or 25.75).")
@@ -50,8 +73,34 @@ def open_account():
         exit()
 
 
+def signin():
+    global balance, account_opened, name, username
+    login_name = input("Enter your username: ")
+    login_pin = input("Enter your pin: ")
+
+    try:
+        cur = conn.cursor()
+        sql_3 = "SELECT name, balance FROM accounts WHERE username = %s AND pin = %s"
+        data_3 = (login_name, login_pin)
+        cur.execute(sql_3, data_3)
+        result = cur.fetchone()
+        if result:
+            name = result[0]
+            balance = float(result[1])
+            username = login_name
+            account_opened = True
+            print(f"Login successful! Welcome back, {name}.")
+            print(f"Account Balance: ${balance:,.2f}")
+            cur.close()
+        else:
+            print("Invalid username or pin. Please try again.")
+            cur.close()
+    except Exception as e:
+        print(f"Database error: {e}")
+
+
 def deposit():
-    global account_balance
+    global balance
     while True:
         try:
             user_input = input("Enter the amount you want to deposit: ")
@@ -61,9 +110,21 @@ def deposit():
                 print("Please enter an amount greater than 0.")
                 continue
 
-            account_balance += amount
+            balance += amount
+            try:
+                cur = conn.cursor()
+                sql_4 = "UPDATE accounts SET balance = %s WHERE username = %s"
+                data_4 = (balance, username)
+                cur.execute(sql_4, data_4)
+                cur.commit()
+                cur.close()
+                break
+            except Exception as e:
+                print(f"Failed to save account: {e}")
+                conn.rollback()
+
             print(
-                f'Deposit successful. Current balance: ${account_balance:,.2f}')
+                f'Deposit successful. Current balance: ${balance:,.2f}')
             break
 
         except ValueError:
@@ -71,14 +132,14 @@ def deposit():
 
 
 def withdraw():
-    global account_balance
+    global balance, username, name
     while True:
         try:
             withdrawal = float(
                 input("Enter the amount you want to withdraw: "))
-            if withdrawal > account_balance:
+            if withdrawal > balance:
                 print("Request Declined: Insufficent balance")
-                print(f"Your account balance is {account_balance:,.2f}.")
+                print(f"Your account balance is {balance:,.2f}.")
                 ask = input(
                     "You want to withdraw a different amount? [yes/no]")
                 while ask not in ["yes", "no"]:
@@ -91,17 +152,29 @@ def withdraw():
             if withdrawal <= 0:
                 print("Please enter a positive amount.")
                 continue
-            account_balance -= withdrawal
+            balance -= withdrawal
+            try:
+                cur = conn.cursor()
+                sql_5 = "UPDATE accounts SET balance = %s WHERE username = %s"
+                data_5 = (balance, username)
+                cur.execute(sql_5, data_5)
+                cur.commit()
+                cur.close()
+                break
+            except Exception as e:
+                print(f"Failed to save account: {e}")
+                conn.rollback()
+
             print(
-                f'Withdrawal successful. Your remaining balance: ${account_balance:,.2f}')
+                f'Withdrawal successful. Your remaining balance: ${balance:,.2f}')
             break
         except ValueError:
             print("Invalid input. Please use numbers (e.g., 50 or 90.75).")
 
 
 def print_balance():
-    global account_balance
-    print(f'Current balance = ${account_balance:,.2f}')
+    global balance
+    print(f'Current balance = ${balance:,.2f}')
 
 
 def exit_program():
@@ -157,7 +230,8 @@ def main():
         open_account()
         ask()
     elif selection == "2":
-        pass
+        signin()
+        ask()
     else:
         exit()
 
