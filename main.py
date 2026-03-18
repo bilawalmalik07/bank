@@ -6,7 +6,18 @@ load_dotenv("database.env")
 
 connection_url = os.getenv("DATABASE_URL")
 
-conn = psycopg2.connect(connection_url)
+if not connection_url:
+    print("❌ ERROR: DATABASE_URL not found!")
+    print("Check your database.env on Mac or devcontainer.json on Codespaces.")
+    sys.exit()
+
+# 4. Connect
+try:
+    conn = psycopg2.connect(connection_url)
+    print("✅ Database Connected Successfully!")
+except Exception as e:
+    print(f"❌ Connection Failed: {e}")
+    sys.exit()
 
 
 balance = 0
