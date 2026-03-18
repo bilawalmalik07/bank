@@ -4,7 +4,7 @@ A professional Python-based Command Line Interface (CLI) application that integr
 
 Click the button below to run this app instantly in your browser:
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/bilawalmalik07/bank-system)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/bilawalmalik07/bank)
 
 ## 🚀 Key Features
 
