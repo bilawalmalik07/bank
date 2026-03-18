@@ -1,6 +1,8 @@
 import os
 import sys
 import psycopg2
+from dotenv import load_dotenv
+load_dotenv("database.env")
 
 connection_url = os.getenv("DATABASE_URL")
 
@@ -38,7 +40,7 @@ def open_account():
                     print("\nUsername created")
                 print(f"\nNow create a 4-digit Pin [eg: 1234].")
                 pin = input("\nEnter a pin : ")
-                while not (pin.isdigit()) and not (len(pin) == 4):
+                while not (pin.isdigit()) or not (len(pin) == 4):
                     print("\nA four digit pin please [eg 1234]")
                     pin = input("\nEnter a pin : ")
                 print("\nPin created.")
