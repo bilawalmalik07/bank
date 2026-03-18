@@ -3,21 +3,19 @@ import sys
 import psycopg2
 from dotenv import load_dotenv
 
-# Try loading the file, but don't crash if it's missing (it's missing on GitHub!)
 load_dotenv("database.env")
 
-# This will get the URL from the JSON if the file above wasn't found
 connection_url = os.getenv("DATABASE_URL")
 
 if not connection_url:
-    print("❌ ERROR: DATABASE_URL is empty in the environment.")
+    print("ERROR: DATABASE_URL is empty in the environment.")
     sys.exit()
 
 try:
     conn = psycopg2.connect(connection_url)
-    print("✅ Success! Database connected.")
+    print("Success! Database connected.")
 except Exception as e:
-    print(f"❌ Connection failed: {e}")
+    print(f"Connection failed: {e}")
 
 
 balance = 0
