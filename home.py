@@ -216,24 +216,27 @@ def ask():
             exit_program()
 
 
-print(f"{'-'*40}")
-print(f"{'-'*40}")
-print(f"{'-'*11}CLI BANKING SYSTEM{'-'*11}")
-print(f"{'-'*40}")
-print(f"{'-'*40}")
-print("OPTIONS\n")
-print("1) Create a new account")
-print("2) Sign into existing account")
-print("3) Exit")
-print(f"{'-'*40}")
-selection = input("Choose [1 , 2 or 3] : ")
-while selection not in ["1", "2", "3"]:
-    selection = input("\nPlease Choose [1 , 2 or 3] : ")
-if selection == "1":
-    open_account()
-    ask()
-elif selection == "2":
-    signin()
-    ask()
-else:
-    exit_program()
+while True:
+    print(f"{'-'*40}")
+    print(f"{'-'*40}")
+    print(f"{'-'*11}CLI BANKING SYSTEM{'-'*11}")
+    print(f"{'-'*40}")
+    print(f"{'-'*40}")
+    print("OPTIONS\n")
+    print("1) Create a new account")
+    print("2) Sign into existing account")
+    print("3) Exit")
+    print(f"{'-'*40}")
+    selection = input("Choose [1 , 2 or 3] : ")
+    while selection not in ["1", "2", "3"]:
+        selection = input("\nPlease Choose [1 , 2 or 3] : ")
+    if selection == "1":
+        open_account()
+        if account_opened:
+            ask()
+    elif selection == "2":
+        signin()
+        if account_opened:
+            ask()
+    else:
+        exit_program()
