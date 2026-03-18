@@ -2,6 +2,10 @@
 
 A professional Python-based Command Line Interface (CLI) application that integrates with a PostgreSQL cloud database (Neon). This project demonstrates core backend engineering principles, including data persistence, secure credential management and relational database design.
 
+Click the button below to run this app instantly in your browser:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/bilawalmalik07/bank-system)
+
 ## 🚀 Key Features
 
 - **Secure Authentication**: Implements a robust sign-in flow using unique usernames and 4-digit PIN validation.
