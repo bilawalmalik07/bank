@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv("database.env")
 
-connection_url = os.getenv("DATABASE_URL")
+connection_url = os.environ.get("DATABASE_URL")
 
 if not connection_url:
     print("ERROR: DATABASE_URL is empty in the environment.")
