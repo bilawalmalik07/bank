@@ -1,6 +1,6 @@
 # 🏦 CLI Banking System
 
-A professional Python-based Command Line Interface (CLI) application that integrates with a PostgreSQL cloud database (Neon). This project demonstrates core backend engineering principles, including data persistence, secure credential management, and relational database design.
+A professional Python-based Command Line Interface (CLI) application that integrates with a PostgreSQL cloud database (Neon). This project demonstrates core backend engineering principles, including data persistence, secure credential management and relational database design.
 
 ## 🚀 Key Features
 
