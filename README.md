@@ -38,4 +38,3 @@ Click the button below to run this app instantly in your browser:
 
 - **Relational Databases**: Designing table schemas and implementing CRUD (Create, Read, Update) operations.
 - **Backend Architecture**: Managing global states and complex user decision loops in Python.
-- **Environment Security**: Safeguarding API keys and database credentials from public exposure.
