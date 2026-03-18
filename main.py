@@ -70,7 +70,8 @@ def open_account():
             except ValueError:
                 print("\nInvalid input. Please enter a number (e.g., 20 or 25.75).")
     else:
-        exit()
+        print("Returning back")
+        return
 
 
 def signin():
