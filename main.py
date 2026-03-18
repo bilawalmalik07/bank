@@ -7,16 +7,7 @@ load_dotenv("database.env")
 
 connection_url = os.environ.get("DATABASE_URL")
 
-if not connection_url:
-    print("ERROR: DATABASE_URL is empty in the environment.")
-    sys.exit()
-
-try:
-    conn = psycopg2.connect(connection_url)
-    print("Success! Database connected.")
-except Exception as e:
-    print(f"Connection failed: {e}")
-
+conn = psycopg2.connect(connection_url)
 
 balance = 0
 account_opened = False
