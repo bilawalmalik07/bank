@@ -71,12 +71,12 @@ def open_account():
                 print("\nInvalid input. Please enter a number (e.g., 20 or 25.75).")
     else:
         print("Returning back")
-        ask()
         return
 
 
 def signin():
     global balance, account_opened, name, username
+    account_opened = False
     login_name = input("\nEnter your username: ")
     login_pin = input("\nEnter your pin: ")
 
@@ -97,6 +97,7 @@ def signin():
         else:
             print("\nInvalid username or pin. Please try again.")
             cur.close()
+            return
     except Exception as e:
         print(f"\nDatabase error: {e}")
 
@@ -218,27 +219,32 @@ def ask():
             exit_program()
 
 
-while True:
-    print(f"{'-'*40}")
-    print(f"{'-'*40}")
-    print(f"{'-'*11}CLI BANKING SYSTEM{'-'*11}")
-    print(f"{'-'*40}")
-    print(f"{'-'*40}")
-    print("OPTIONS\n")
-    print("1) Create a new account")
-    print("2) Sign into existing account")
-    print("3) Exit")
-    print(f"{'-'*40}")
-    selection = input("Choose [1 , 2 or 3] : ")
-    while selection not in ["1", "2", "3"]:
-        selection = input("\nPlease Choose [1 , 2 or 3] : ")
-    if selection == "1":
-        open_account()
-        if account_opened:
-            ask()
-    elif selection == "2":
-        signin()
-        if account_opened:
-            ask()
-    else:
-        exit_program()
+def main():
+    while True:
+        print(f"{'-'*40}")
+        print(f"{'-'*40}")
+        print(f"{'-'*11}CLI BANKING SYSTEM{'-'*11}")
+        print(f"{'-'*40}")
+        print(f"{'-'*40}")
+        print("OPTIONS\n")
+        print("1) Create a new account")
+        print("2) Sign into existing account")
+        print("3) Exit")
+        print(f"{'-'*40}")
+        selection = input("Choose [1 , 2 or 3] : ")
+        while selection not in ["1", "2", "3"]:
+            selection = input("\nPlease Choose [1 , 2 or 3] : ")
+        if selection == "1":
+            open_account()
+            if account_opened:
+                ask()
+        elif selection == "2":
+            signin()
+            if account_opened:
+                ask()
+        else:
+            exit_program()
+
+
+if __name__ == "__main__":
+    main()
