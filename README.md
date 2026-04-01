@@ -2,7 +2,7 @@
 
 A professional Python-based Command Line Interface (CLI) application that integrates with a PostgreSQL cloud database (Neon). This project demonstrates core backend engineering principles, including data persistence, secure credential management and relational database design.
 
-![Video Demo](https://github.com/user-attachments/assets/6ad3534e-d233-46a5-a420-5e479d373f39)
+![Video Demo](https://github.com/user-attachments/assets/f69da92a-334e-4d9d-80fe-668e78b429ea)
 
 Click the button below to run this app instantly in your browser:
 
