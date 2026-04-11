@@ -25,6 +25,8 @@ def open_account():
         name = request.form['name'].capitalize()
         username = request.form['username']
         pin = request.form['pin']
+        if not pin.isdigit() or len(pin) != 4:
+            return render_template('error.html', message="Invalid PIN format. Please enter 4 digits.")
         initial_deposit = float(request.form['deposit'])
 
         if initial_deposit < 20:
