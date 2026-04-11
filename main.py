@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 if os.path.exists("database.env"):
     load_dotenv("database.env")
 app = Flask(__name__)
-app.secret_key = "key"
+app.secret_key = "secret_key"
 
 
 def get_db_connection():
