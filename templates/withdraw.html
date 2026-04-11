@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="main-header">
+    <div class="header-content">
+        <div class="bank-logo">B</div>
+        <h2 class="header-title">BM Banking</h2>
+    </div>
+    </header>
+   <div class="container">
+    <h1>Transactions</h1>
+    <p>Enter amount to process</p>
+    <form method="POST">
+        <input type="number" name="amount" placeholder="Amount ($)" step="0.01" required>
+        <button type="submit" class="btn">Confirm Transaction</button>
+    </form>
+    <div class="footer-text"><a href="/dashboard">Cancel and Return</a></div>
+</div>
+</body>
+</html>

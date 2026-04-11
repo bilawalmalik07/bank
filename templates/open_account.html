@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<body>
+    <header class="main-header">
+    <div class="header-content">
+        <div class="bank-logo">B</div>
+        <h2 class="header-title">BM Banking</h2>
+    </div>
+    </header>
+    <div class="container">
+    <h1>Join BM Bank</h1>
+    <p>Start with a $20 minimum deposit</p>
+    <form action="/open_account" method="POST">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="text" name="username" placeholder="Choose Username" required>
+        <input type="password" name="pin" placeholder="4-Digit Pin" maxlength="4" required>
+        <input type="number" name="deposit" placeholder="Initial Deposit ($)" min="20" step="0.01" required>
+        <button type="submit" class="btn">Create Account</button>
+    </form>
+    <div class="footer-text"><a href="/">Back to Home</a></div>
+</div>
+</body>
+</html>

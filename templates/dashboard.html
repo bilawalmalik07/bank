@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</style>
+</head>
+<body>
+    <header class="main-header">
+    <div class="header-content">
+        <div class="bank-logo">B</div>
+        <h2 class="header-title">BM Banking</h2>
+    </div>
+    </header>
+   <div class="container">
+        <h1>Welcome, {{ name }}</h1>
+        <p>Current Account Balance</p>
+        
+        <div class="balance-display">${{ "{:,.2f}".format(balance) }}</div>
+        
+        <a href="/deposit" class="btn">Deposit Money</a>
+        <a href="/withdraw" class="btn btn-alt">Withdraw Funds</a>
+
+        <div class="footer-text">
+            <a href="/logout">Logout Securely</a>
+        </div>
+    </div>
+</body>
+</html>

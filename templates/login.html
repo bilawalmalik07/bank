@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="main-header">
+    <div class="header-content">
+        <div class="bank-logo">B</div>
+        <h2 class="header-title">BM Banking</h2>
+    </div>
+    </header>
+    <div class="container">
+        <h1>Welcome Back</h1>
+        <p>Sign in to your account</p>
+        <form action="/signin" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="pin" placeholder="Pin" required>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="footer-text">New here? <a href="/open_account">Join now</a></div>
+    </div>
+</body>
+</html>
