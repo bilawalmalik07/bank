@@ -1,46 +1,34 @@
-# 🏦 CLI Banking System
+# 🏦 BM Banking: Full-Stack Web Application
 
-A professional Python-based Command Line Interface (CLI) application that integrates with a PostgreSQL cloud database (Neon). This project demonstrates core backend engineering principles, including data persistence, secure credential management and relational database design.
+A professional, secure banking web application built with **Python (Flask)** and **PostgreSQL**. This project demonstrates a complete cloud-deployed web service, featuring real-time data persistence and a modern, responsive GUI.
 
-![Video Demo](https://github.com/user-attachments/assets/f69da92a-334e-4d9d-80fe-668e78b429ea)
-
-Click the button below to run this app instantly in your browser:
-
-> [!IMPORTANT]
-> **Setup Instructions:**
->
-> 1. Once the Codespace opens, **click on `main.py`** in the file explorer.
-> 2. **Wait 20-30 seconds** for the terminal to finish installing all requirements (database drivers and environment tools)
-> 3. Once the terminal is ready, run the app by typing: python main.py
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/bilawalmalik07/bank)
+[🌐 **Live Demo on Render**](https://bank-9bdp.onrender.com/)
 
 ## 🚀 Key Features
 
-- **Secure Authentication**: Implements a robust sign-in flow using unique usernames and 4-digit PIN validation.
-- **Cloud Data Persistence**: All user data and transactions are synchronized in real-time to a remote PostgreSQL database, ensuring data is never lost when the program closes.
-- **Core Banking Operations**:
-  - **Account Creation**: Validates unique usernames and enforces a minimum initial deposit.
-  - **Real-time Transactions**: Supports instant deposits and withdrawals with automated balance updates.
-  - **Integrity Checks**: Built-in logic to prevent overdrafts and ensure sufficient funds for all withdrawals.
-- **Security First**: Utilizes environment variables (`.env`) to protect sensitive database connection strings.
+- **Secure Web Authentication**: Implements session-based login with username and 4-digit PIN validation.
+- **Cloud Data Persistence**: Fully integrated with **Neon PostgreSQL**, ensuring all user balances and accounts are stored securely in the cloud.
+- **Real-time Transactions**: Supports instant deposits and withdrawals with automated server-side balance updates.
+- **Robust Error Handling**: Custom logic to prevent overdrafts, enforce minimum deposits ($20), and handle duplicate username registrations.
 
 ## 🛠️ Tech Stack
 
-- **Language**: Python 3
-- **Database**: PostgreSQL (Cloud-hosted via Neon)
-- **Libraries**:
-  - `psycopg2`: For advanced PostgreSQL database interaction and query execution.
-  - `python-dotenv`: For secure management of environment variables.
+- **Backend**: Python 3, Flask
+- **Database**: PostgreSQL (Cloud-hosted via **Neon**)
+- **Frontend**: HTML5, CSS3 (Custom GUI)
+- **Deployment**: Render (Web Service), GitHub (Version Control)
+- **Libraries**: `psycopg2-binary`, `python-dotenv`, `gunicorn`
 
-## ⚙️ How It Works
+## ⚙️ Engineering Workflow
 
-1. **Connection**: The app establishes a secure link to the Neon cloud database using a hidden connection URL.
-2. **Authentication**: Users can either create a new account (which performs a "duplicate check" on the database) or sign into an existing one.
-3. **Transaction Flow**: When a user deposits or withdraws, the app calculates the new balance and sends an `UPDATE` SQL command to the cloud to ensure the database matches the local state.
-4. **Error Handling**: The system uses `try/except` blocks to handle database downtime or invalid user inputs gracefully.
+1.  **Architecture**: The app uses a functional Flask backend that communicates with a PostgreSQL relational database through optimized SQL queries.
+2.  **Security**: Credentials are managed via `os.environ`, ensuring the `DATABASE_URL` is never exposed in the public repository.
+3.  **Deployment**: Configured with a `requirements.txt` and a customized Start Command on Render to bridge the gap between local development on macOS and cloud production.
 
 ## 🧠 Skills Demonstrated
 
-- **Relational Databases**: Designing table schemas and implementing CRUD (Create, Read, Update) operations.
-- **Backend Architecture**: Managing global states and complex user decision loops in Python.
+- **Full-Stack Development**: Connecting a Python backend to a dynamic HTML/CSS frontend.
+- **Cloud Infrastructure**: Managing cloud databases (Neon) and web hosting platforms (Render).
+- **Database Design**: Implementing CRUD (Create, Read, Update) operations and maintaining data integrity.
+
+---
