@@ -68,7 +68,7 @@ def signin():
             session['name'] = user[0]
             return redirect('/dashboard')
         else:
-            return "Invalid login. <a href='/signin'>Try again</a>"
+            return render_template('error.html', message="Invalid Username or Pin. Please check your credentials and try again.")
 
     return render_template('login.html')
 
