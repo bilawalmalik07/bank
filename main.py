@@ -3,7 +3,8 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 
-load_dotenv("database.env")
+if os.path.exists("database.env"):
+    load_dotenv("database.env")
 app = Flask(__name__)
 app.secret_key = "key"
 
