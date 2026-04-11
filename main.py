@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 import os
+import sqlite3
 import psycopg2
 from dotenv import load_dotenv
 
@@ -11,6 +12,8 @@ app.secret_key = os.environ.get("SECRET_KEY", "key")
 
 def get_db_connection():
     connection_url = os.environ.get("DATABASE_URL")
+    if not connection_url:
+        return sqlite3.connect('local_test.db')
     return psycopg2.connect(connection_url)
 
 
